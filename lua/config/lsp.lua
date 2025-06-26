@@ -5,6 +5,7 @@ vim.lsp.enable({
     "zls",
     "ts-ls",
     "rust-analyzer",
+    "basedpyright",
 })
 
 -- LSP servers are automatically managed by Mason
