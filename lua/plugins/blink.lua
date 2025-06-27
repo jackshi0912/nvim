@@ -33,7 +33,6 @@ return {
                 },
                 keymap = {
                   preset = 'default',
-                  ['<Tab>'] = { 'select_and_accept' },
                 },
                 cmdline = {
                     enabled = false,
