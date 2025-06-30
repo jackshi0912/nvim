@@ -39,6 +39,9 @@ vim.keymap.set("n", "<leader>f", function()
     require("conform").format({ bufnr = 0 })
 end)
 
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<M-k>", "<cmd>lnext<CR>zz")
