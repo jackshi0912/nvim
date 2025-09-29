@@ -11,7 +11,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "=ap", "ma=ap'a")
-vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
+vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>")
 
 vim.keymap.set("n", "<leader>vwm", function()
     require("vim-with-me").StartVimWithMe()
@@ -48,7 +48,7 @@ vim.keymap.set('n', '<A-k>', function() vim.diagnostic.goto_prev(
     { severity = { min = vim.diagnostic.severity.WARN } })
 end)
 
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set("n", "<leader>fm", function()
     require("conform").format({ bufnr = 0 })
 end)
 

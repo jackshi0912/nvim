@@ -7,6 +7,7 @@ return {
                 lua = { "stylua" },
                 go = { "gofmt" },
                 rust = { "rustfmt", lsp_format = "fallback" },
+                python = { "black" },
             }
         })
     end
