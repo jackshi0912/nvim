@@ -1,3 +1,13 @@
+local lspconfig = require("lspconfig")
+local util = require("lspconfig.util")
+
+lspconfig.basedpyright.setup{
+  root_dir = function(fname)
+    -- dynamically search for pyrightconfig.json in parent dirs
+    return util.root_pattern("pyrightconfig.json")(fname) or vim.fn.getcwd()
+  end,
+}
+
 -- Mason PATH is handled by core.mason-path
 vim.lsp.enable({
     "lua-ls",
@@ -5,7 +15,6 @@ vim.lsp.enable({
     "zls",
     "ts-ls",
     "rust-analyzer",
-    "basedpyright",
     "html",
 })
 
