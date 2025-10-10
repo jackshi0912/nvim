@@ -1,6 +1,14 @@
 local lspconfig = require("lspconfig")
 local util = require("lspconfig.util")
 
+lspconfig.templ.setup(
+    {
+      cmd = { "templ", "lsp" },
+      filetypes = { "templ" },
+      root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
+    }
+)
+
 lspconfig.basedpyright.setup{
   root_dir = function(fname)
     -- dynamically search for pyrightconfig.json in parent dirs
