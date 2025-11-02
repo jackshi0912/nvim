@@ -33,6 +33,7 @@ return {
                 },
                 keymap = {
                   preset = 'default',
+                  ['<Tab>'] = false,  -- disables blink.cmp's mapping>
                 },
                 cmdline = {
                     enabled = false,
