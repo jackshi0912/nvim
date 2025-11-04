@@ -41,11 +41,11 @@ vim.keymap.set('n', '<A-l>', '<C-w>l')
 
 -- Map Alt+j to go to the next error.
 vim.keymap.set('n', '<A-j>', function() vim.diagnostic.goto_next(
-    { severity = { min = vim.diagnostic.severity.WARN } })
+    { severity = { min = vim.diagnostic.severity.HINT} })
 end)
 -- Map Alt+k to go to the previous error.
 vim.keymap.set('n', '<A-k>', function() vim.diagnostic.goto_prev(
-    { severity = { min = vim.diagnostic.severity.WARN } })
+    { severity = { min = vim.diagnostic.severity.HINT} })
 end)
 
 vim.keymap.set("n", "<leader>fm", function()
