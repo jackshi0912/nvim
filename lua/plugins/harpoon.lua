@@ -14,5 +14,6 @@ return {
         map("<leader>k", function() harpoon:list():select(2) end)
         map("<leader>l", function() harpoon:list():select(3) end)
         map("<leader>;", function() harpoon:list():select(4) end)
+        map("<leader>'", function() harpoon:list():select(5) end)
     end
 }
