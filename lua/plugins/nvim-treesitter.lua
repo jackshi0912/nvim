@@ -13,6 +13,7 @@ return {
                 modules = {},
                 highlight = {
                     enable = true,
+                    disable = { "bash" }, -- Ignore the buggy bash parser
                     additional_vim_regex_highlighting = false,
                 },
                 indent = { enable = true },
