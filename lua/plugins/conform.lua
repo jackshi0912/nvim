@@ -7,8 +7,14 @@ return {
                 lua = { "stylua" },
                 go = { "gofmt" },
                 rust = { "rustfmt", lsp_format = "fallback" },
-                python = { "black" },
-            }
+                python = { "yapf" },
+            },
+            formatters = {
+              yapf = {
+                -- Force yapf to use the Google style guide if no local config is found
+                prepend_args = { "--style", "google" },
+              },
+            },
         })
     end
 }
