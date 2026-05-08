@@ -1,6 +1,8 @@
 local lspconfig = require("lspconfig")
 local util = require("lspconfig.util")
 
+lspconfig.starpls.setup{}
+
 lspconfig.templ.setup(
     {
       cmd = { "templ", "lsp" },
@@ -9,11 +11,66 @@ lspconfig.templ.setup(
     }
 )
 
+local function get_bazel_extra_paths(root_dir)
+  local paths = {}
+  local bazel_out = root_dir .. "/bazel-" .. vim.fs.basename(root_dir)
+  if vim.fn.isdirectory(bazel_out) == 0 then return paths end
+
+  -- 1. Add external dependencies (Bzlmod style)
+  local external_dir = bazel_out .. "/external"
+  if vim.fn.isdirectory(external_dir) == 1 then
+    local handle = vim.loop.fs_scandir(external_dir)
+    if handle then
+      while true do
+        local name, _ = vim.loop.fs_scandir_next(handle)
+        if not name then break end
+        -- Look for pip_deps or other markers
+        if name:find("pip_deps") then
+          local site_packages = external_dir .. "/" .. name .. "/site-packages"
+          if vim.loop.fs_stat(site_packages) then
+            table.insert(paths, site_packages)
+          end
+        end
+      end
+    end
+  end
+
+  -- 2. Add local generated paths
+  local bin_path = bazel_out .. "/bazel-bin"
+  if vim.fn.isdirectory(bin_path) == 1 then
+    table.insert(paths, bin_path)
+  end
+
+  return paths
+end
+
 lspconfig.basedpyright.setup{
-  root_dir = function(fname)
-    -- dynamically search for pyrightconfig.json in parent dirs
-    return util.root_pattern("pyrightconfig.json")(fname) or vim.fn.getcwd()
+  on_new_config = function(new_config, new_root_dir)
+    local extra_paths = get_bazel_extra_paths(new_root_dir)
+    if #extra_paths > 0 then
+      new_config.settings.basedpyright.analysis.extraPaths = extra_paths
+    end
   end,
+  root_dir = function(fname)
+    return util.root_pattern(
+      "WORKSPACE",
+      "WORKSPACE.bazel",
+      "MODULE.bazel",
+      "pyrightconfig.json",
+      "pyproject.toml",
+      "setup.py",
+      ".git"
+    )(fname) or vim.fn.getcwd()
+  end,
+  settings = {
+    basedpyright = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        typeCheckingMode = "basic",
+      },
+    },
+  },
 }
 
 -- Mason PATH is handled by core.mason-path
