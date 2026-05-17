@@ -39,12 +39,18 @@ vim.keymap.set('n', '<A-h>', '<C-w>h')
 -- Map Alt+l to go to the right window
 vim.keymap.set('n', '<A-l>', '<C-w>l')
 
+-- Map Alt+j to go to the bottom window
+vim.keymap.set('n', '<A-j>', '<C-w>j')
+
+-- Map Alt+k to go to the top window
+vim.keymap.set('n', '<A-k>', '<C-w>k')
+
 -- Map Alt+j to go to the next error.
-vim.keymap.set('n', '<A-j>', function() vim.diagnostic.goto_next(
+vim.keymap.set('n', '<C-j>', function() vim.diagnostic.goto_next(
     { severity = { min = vim.diagnostic.severity.HINT} })
 end)
 -- Map Alt+k to go to the previous error.
-vim.keymap.set('n', '<A-k>', function() vim.diagnostic.goto_prev(
+vim.keymap.set('n', '<C-k>', function() vim.diagnostic.goto_prev(
     { severity = { min = vim.diagnostic.severity.HINT} })
 end)
 
@@ -58,3 +64,5 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.api.nvim_set_keymap('n', 'O', 'o<Esc>', { noremap = true, silent = true })
 vim.keymap.set( "i", "<C-p>", "<C-R>\"", { noremap = true, silent = true })
 
+-- Map Control + Space to Code Action in Normal ('n') and Insert ('i') modes
+vim.keymap.set({ 'n', 'i' }, '<C-Space>', vim.lsp.buf.code_action, { desc = 'LSP Code Action' })
