@@ -8,6 +8,7 @@ return {
                 go = { "gofmt" },
                 rust = { "rustfmt", lsp_format = "fallback" },
                 python = { "yapf" },
+                dart = { "dart_format" },
             },
             formatters = {
               yapf = {
