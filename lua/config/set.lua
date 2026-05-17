@@ -29,3 +29,14 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Enable native tree-sitter highlighting globally when available',
+  callback = function(args)
+    -- Neovim 0.12 pattern: safely verify if a parser is installed
+    if vim.treesitter.get_parser(args.buf, nil, { error = false }) then
+      vim.treesitter.start(args.buf)
+    end
+  end,
+})
+
