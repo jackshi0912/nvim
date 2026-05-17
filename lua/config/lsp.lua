@@ -73,7 +73,6 @@ lspconfig.basedpyright.setup{
   },
 }
 
--- Mason PATH is handled by core.mason-path
 vim.lsp.enable({
     "lua-ls",
     "gopls",
