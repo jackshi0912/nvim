@@ -8,6 +8,17 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+-- Dart-specific overrides
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dart",
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 2
+    -- expandtab is already globally true, so no need to set it again here
+  end,
+})
+
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
