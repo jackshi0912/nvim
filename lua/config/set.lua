@@ -41,6 +41,9 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+vim.filetype.add({ extension = { templ = "templ" } })
+vim.filetype.add({ extension = { go = "go" } })
+
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Enable native tree-sitter highlighting globally when available',
   callback = function(args)
