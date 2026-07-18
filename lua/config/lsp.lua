@@ -10,6 +10,13 @@ lspconfig.templ.setup(
       root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
     }
 )
+lspconfig.zls.setup({
+  settings = {
+    zls = {
+      build_on_save_args = {"-fincremental"}
+    }
+  }
+})
 
 local function get_bazel_extra_paths(root_dir)
   local paths = {}
