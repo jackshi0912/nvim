@@ -9,6 +9,7 @@ return {
                 rust = { "rustfmt", lsp_format = "fallback" },
                 python = { "yapf" },
                 dart = { "dart_format" },
+                zig = { "zigfmt" },
             },
             formatters = {
               yapf = {
